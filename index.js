@@ -3,6 +3,7 @@ const chalk = require('chalk'); //syntax to style the sheet
 
 console.log(chalk.whiteBright.bold.bgBlackBright("Welcome to Marvel Cinematic Universe \n"));
 
+var name = '';
 var score = 0;
 
 //Array of Quiz questions
@@ -112,50 +113,47 @@ playingrnot();
 // function for user details
 function userdetails()
 {
-    var name = readlineSync.question(chalk.whiteBright.bold("\nPlease Enter your Name to start the game.......  "));
-    console.log(chalk.greenBright.bold("\nHello!  ",  name));
+  name = readlineSync.question(chalk.whiteBright.bold("\nPlease Enter your Name to start the game.......  "));
+  console.log(chalk.greenBright.bold("\nHello!  ",  name));
   
-    console.log(chalk.yellowBright.dim("\n-----------------------------------------------------------\nPlease read Rules and Guidelines before starting the game: \n  1. Game is of 10 questions. \n  2. Each question carries 5 points \n  3. Correct Answer:     5 points \n     Incorrect Answer:  -2 points \n-----------------------------------------------------------"));
-
-      
-         
+  console.log(chalk.yellowBright.dim("\n-----------------------------------------------------------\nPlease read Rules and Guidelines before starting the game: \n  1. Game is of 10 questions. \n  2. Each question carries 5 points \n  3. Correct Answer:     5 points \n     Incorrect Answer:  -2 points \n-----------------------------------------------------------"));  
 }
 
 //function for Quiz
 function playgame()
 {
-    for(var i = 0;i < quizList.length;i++)
+  for(var i = 0;i < quizList.length;i++)
+  {
+    var questions = quizList[i].question;
+    var option1 = quizList[i].a;
+    var option2 = quizList[i].b;
+    var option3 = quizList[i].c;
+    var option4 = quizList[i].d;
+    console.log(chalk.cyanBright.bold(questions,"\n"));
+    console.log(chalk.whiteBright.bold(option1));
+    console.log(chalk.whiteBright.bold(option2));
+    console.log(chalk.whiteBright.bold(option3));
+    console.log(chalk.whiteBright.bold(option4));
+    var userAnswer = readlineSync.question(chalk.whiteBright.bold("\nYour Answer: "));
+    if(userAnswer.toLowerCase() == quizList[i].correctAnswer.toLowerCase())
     {
-      var questions = quizList[i].question;
-      var option1 = quizList[i].a;
-      var option2 = quizList[i].b;
-      var option3 = quizList[i].c;
-      var option4 = quizList[i].d;
-      console.log(chalk.cyanBright.bold(questions,"\n"));
-      console.log(chalk.whiteBright.bold(option1));
-      console.log(chalk.whiteBright.bold(option2));
-      console.log(chalk.whiteBright.bold(option3));
-      console.log(chalk.whiteBright.bold(option4));
-      var userAnswer = readlineSync.question(chalk.whiteBright.bold("\nYour Answer: "));
-      if(userAnswer.toLowerCase() == quizList[i].correctAnswer.toLowerCase())
-      {
-        score = score + 5;
-        console.log(chalk.greenBright("\nAmazing!! Correct Answer (+5)\nCurrent Score: ",score));
-        console.log("-----------------------------------------------------------");
-      }
-      else
-      {
-        score = score - 2;
-        console.log(chalk.whiteBright.bgRedBright("Oopps!! Wrong Answer (+5)\n Current Score: ",score));
-        console.log("-----------------------------------------------------------");
-      }
-
+      score = score + 5;
+      console.log(chalk.greenBright("\nAmazing!! Correct Answer (+5)\nCurrent Score: ",score));
+      console.log("-----------------------------------------------------------");
     }
-    console.log(chalk.bold.yellowBright("The Game has Ended......., THANK YOU for Playing"));
-    console.log("-----------------------------------------------------------\n");  
+    else
+    {
+      score = score - 2;
+      console.log(chalk.whiteBright.bgRedBright("Oopps!! Wrong Answer (+5)\n Current Score: ",score));
+      console.log("-----------------------------------------------------------");
+    }
+  }
+  console.log(chalk.bold.yellowBright("The Game has Ended......., THANK YOU for Playing"));
+  console.log("-----------------------------------------------------------\n");  
   leaderBoard();
 }
- function leaderBoard()
+
+function leaderBoard()
 {
   var highScores=[
                   {name:"Pari",score: 50},
@@ -163,14 +161,22 @@ function playgame()
                   {name: "Prashanth",score: 46},
                   {name: "Akhil",score: 45},
                   {name: "Sai Ram",score: 20},
-                  //{name: name,score: score}
+                  {name: name,score: score}
                   ];
-  console.log(chalk.magentaBright.bold.underline("Leader Board \n"));
+
+  if((score >= highScores[0].score)||(score >= highScores[1].score)||(score >= highScores[2].score)||(score >= highScores[3].score)||(score >= highScores[4].score))
+  {
+    console.log(chalk.green.italic.bold("Hurrayyy!! you joined the Leader Board \n"));
+
+    console.log(chalk.magentaBright.bold.underline("Leader Board \n"));
+  }
+  else
+  {
+    console.log(chalk.yellow.italic.bold("Sorry!!!  You Did Not make to the Leader Board \nYou Scored: ",score));
+    return 0;
+  }
   for(i = 0;i < highScores.length;i++)
   {
-   console.log(chalk.whiteBright.bold((i+1)+"  Name : "+highScores[i].name + ",\n   Score : "+highScores[i].score, "\n")); 
+    console.log(chalk.whiteBright.bold((i+1)+"  Name : "+highScores[i].name + ",\n   Score : "+ highScores[i].score, "\n"));
   }
-
-  console.log(chalk.greenBright.italic("Hurrayyy!! you scored: ", score));
-  console.log("-----------------------------------------------------------");
 }
