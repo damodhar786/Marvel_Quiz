@@ -162,7 +162,7 @@ function playgame()
                   {name:"Dhiru",score: 48},
                   {name: "Prashanth",score: 46},
                   {name: "Akhil",score: 45},
-                  {name: "Sai",score: 20},
+                  {name: "Sai Ram",score: 20},
                   //{name: name,score: score}
                   ];
   console.log(chalk.magentaBright.bold("Leader Board "));
