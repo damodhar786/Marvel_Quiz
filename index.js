@@ -161,7 +161,8 @@ function playgame()
                   {name:"Pari",score: 50},
                   {name:"Dhiru",score: 48},
                   {name: "Prashanth",score: 46},
-                  {name: "Dam",score: 45},
+                  {name: "Akhil",score: 45},
+                  {name: "Sai",score: 20},
                   //{name: name,score: score}
                   ];
   console.log(chalk.magentaBright.bold("Leader Board "));
