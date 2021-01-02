@@ -152,7 +152,7 @@ function playgame()
 
     }
     console.log(chalk.bold.yellowBright("The Game has Ended......., THANK YOU for Playing"));
-    console.log("-----------------------------------------------------------");  
+    console.log("-----------------------------------------------------------\n");  
   leaderBoard();
 }
  function leaderBoard()
@@ -165,7 +165,7 @@ function playgame()
                   {name: "Sai Ram",score: 20},
                   //{name: name,score: score}
                   ];
-  console.log(chalk.magentaBright.bold("Leader Board "));
+  console.log(chalk.magentaBright.bold.underline("Leader Board \n"));
   for(i = 0;i < highScores.length;i++)
   {
    console.log(chalk.whiteBright.bold((i+1)+"  Name : "+highScores[i].name + ",\n   Score : "+highScores[i].score)); 
